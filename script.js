@@ -17,7 +17,7 @@ const filter = (cars, selectValue) => {
 	})
 	return objCars
 }
-
+ 
 select.addEventListener('change', (e) => {
 	const value = e.target.value
 	getData('./db/cars.json').then(data => render(filter(data, value)))
