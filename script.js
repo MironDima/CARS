@@ -3,16 +3,21 @@ const result = document.getElementById('result')
 
 const render = (cars) => {
 	result.innerHTML = select.options[select.selectedIndex].text
+	cars.forEach(car => {
+		if(select.options[select.selectedIndex].value !== '')
+			result.innerHTML = `Тачка ${car.brand} ${car.model}<br> Цена: ${car.price}`
+	})
 }
 
 const filter = (cars, selectValue) => {
 	let objCars = cars.filter(carElem => {
 		if (selectValue === carElem.brand) {
-			result.innerHTML = `Тачка ${carElem.brand} ${carElem.model}<br> Цена: ${carElem.price}`
+			return selectValue === carElem.brand
 		}
 	})
 	return objCars
 }
+
 select.addEventListener('change', (e) => {
 	const value = e.target.value
 	getData('./db/cars.json').then(data => render(filter(data, value)))
